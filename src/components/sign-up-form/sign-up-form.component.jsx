@@ -41,52 +41,59 @@ const SignUpForm = () => {
             if (error.code === "auth/email-already-in-use") {
                 alert("email already in use")
             } else {
-
                 console.log(error)
             }
         }
 
     }
+
+
     const handleChange = e => {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
     }
     return (
-        <div className="sign-up-container">
-            <h2>Don't have an Account?</h2>
-            <span>Sign Up with your email and password</span>
-            {/* use handleSubmit function in onSubmit  */}
-            <form onSubmit={handleSubmit}>
-                <FormInput
-                    label="Display Name"
-                    type="text"
-                    onChange={handleChange}
-                    name="displayName"
-                    value={displayName}
-                />
-                <FormInput
-                    label="Email"
-                    type="text"
-                    onChange={handleChange}
-                    name="email"
-                    value={email}
-                />
-                <FormInput
-                    label="Password"
-                    type="password"
-                    onChange={handleChange}
-                    name="password"
-                    value={password}
-                />
-                <FormInput
-                    label="Confirm Password"
-                    type="password"
-                    onChange={handleChange}
-                    name="confirmPassword"
-                    value={confirmPassword}
-                />
-                <Button type="submit">Sign Up</Button>
-            </form>
+        <div>
+            <div className="sign-up-container">
+                <h2>Don't have an Account?</h2>
+                <span>Sign Up with your email and password</span>
+                {/* use handleSubmit function in onSubmit  */}
+                <form onSubmit={handleSubmit}>
+                    <FormInput
+                        label="Display Name"
+                        type="text"
+                        required
+                        onChange={handleChange}
+                        name="displayName"
+                        value={displayName}
+                    />
+                    <FormInput
+                        label="Email"
+                        type="text"
+                        required
+                        onChange={handleChange}
+                        name="email"
+                        value={email}
+                    />
+                    <FormInput
+                        label="Password"
+                        type="password"
+                        required
+                        onChange={handleChange}
+                        name="password"
+                        value={password}
+                    />
+                    <FormInput
+                        label="Confirm Password"
+                        type="password"
+                        required
+                        onChange={handleChange}
+                        name="confirmPassword"
+                        value={confirmPassword}
+                    />
+                    <Button type="submit">Sign Up</Button>
+                </form>
+            </div>
         </div>
     )
 }

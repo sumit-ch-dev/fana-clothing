@@ -2,7 +2,13 @@
 // Import the functions you need from the SDKs you need
 
 import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 import {
   getFirestore,
   doc,
@@ -33,7 +39,7 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth, additionalData={}) => {
+export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) => {
 
   if (!userAuth) return;
 
@@ -43,8 +49,8 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData={}) =>
 
   const userSnapshot = await getDoc(userRef);
 
-  console.log(userSnapshot)
-  console.log(userSnapshot.exists())
+  //console.log(userSnapshot)
+  //console.log(userSnapshot.exists())
 
   //if user data exists, return it
 
@@ -73,7 +79,13 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData={}) =>
 
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-  if(!email || !password) return console.log("email and password are required")
-  
+  if (!email || !password) return console.log("email and password are required")
+
   return await createUserWithEmailAndPassword(auth, email, password)
+}
+
+export const userSignInWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return
+
+  return await signInWithEmailAndPassword(auth, email, password)
 }
