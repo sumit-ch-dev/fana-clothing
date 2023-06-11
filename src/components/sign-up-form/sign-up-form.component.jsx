@@ -9,6 +9,7 @@ import "./sign-up-form.styles.scss"
 import Button from "../button/button.component"
 
 
+
 const formInitialState = {
     displayName: "",
     email: "",
@@ -21,7 +22,6 @@ const SignUpForm = () => {
     const [form, setForm] = useState(formInitialState)
     const { displayName, email, password, confirmPassword } = form
 
-    //console.log(form)
 
     const clearForm = () => {
         setForm(formInitialState)
