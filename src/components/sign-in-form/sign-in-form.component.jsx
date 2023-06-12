@@ -31,6 +31,7 @@ const SignInForm = () => {
         
     }
 
+    
     const handleSubmit = async e => {
         e.preventDefault()
 
@@ -53,8 +54,6 @@ const SignInForm = () => {
 
         }
     }   
-
-
 
     const handleChange = e => {
         const { name, value } = e.target
