@@ -14,7 +14,7 @@ const CartIcon = () => {
     //const totalItems = cartItems.map(item => item.quantity).reduce((acc, curr) => acc + curr, 0)
 
     return (
-        <div className='cart-icon' onClick={toggleCart}>
+        <div className='cart-icon-container' onClick={toggleCart}>
             <ShoppingIcon className='shopping-icon'/>
             <span className='item-count'>{itemCount}</span>
             
