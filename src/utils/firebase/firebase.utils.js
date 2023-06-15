@@ -9,13 +9,17 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  onAuthStateChanged
+  onAuthStateChanged,
 } from "firebase/auth";
+
 import {
   getFirestore,
   doc,
   getDoc,
   setDoc,
+  collection,
+  query,
+  getDocs,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -41,20 +45,42 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
+// export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+//   const collectionRef = collection(db, collectionKey);
+
+//   const batch = writeBatch(db);
+
+//   objectsToAdd.forEach((obj) => {
+//     const newDocRef = doc(collectionRef, obj.title.toLowerCase());
+//     batch.set(newDocRef, obj);
+//   });
+
+//   await batch.commit();
+// };
+
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, 'categories');
+  const q = query(collectionRef);
+
+  const querySnapshot = await getDocs(q);
+
+  const categoryMap = querySnapshot.docs.reduce((accumulator, docSnapshot) => {
+    const { title, items } = docSnapshot.data();
+    accumulator[title.toLowerCase()] = items;
+    return accumulator;
+  }, {})
+
+  return categoryMap;
+}
+
+
 export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) => {
 
   if (!userAuth) return;
 
   const userRef = doc(db, "users", userAuth.uid);
 
-  console.log(userRef)
-
   const userSnapshot = await getDoc(userRef);
-
-  //console.log(userSnapshot)
-  //console.log(userSnapshot.exists())
-
-  //if user data exists, return it
 
   if (userSnapshot.exists()) {
     return userRef;
