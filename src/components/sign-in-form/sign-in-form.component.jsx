@@ -37,7 +37,6 @@ const SignInForm = () => {
 
         try {
             await userSignInWithEmailAndPassword(email, password)
-            //console.log(response)
             clearForm()
         } catch (error) {
             switch (error.code) {

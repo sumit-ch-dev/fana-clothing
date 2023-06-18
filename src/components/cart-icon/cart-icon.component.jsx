@@ -6,7 +6,6 @@ import { setIsCartOpen } from '../../store/cart/cart.action';
 
 
 const CartIcon = () => {
-    //const { isCartOpen, setCartOpen, itemCount } = useContext(CartContext)
     const dispatch = useDispatch()
     const itemCount = useSelector(selectCartItemsCount)
     const isCartOpen = useSelector(selectIsCartOpen)

@@ -15,7 +15,6 @@ import { addItemToCart, removeItemFromCart, clearItemFromCart } from '../../stor
 const CheckoutItem = ({ cartItem }) => {
     const { name, imageUrl, price, quantity } = cartItem
     const dispatch = useDispatch()
-    //const { addItemToCart, removeItemFromCart, clearItemFromCart } = useContext(CartContext)
     const cartItems = useSelector(selectCartItems)
     const addItemHandler = () => (
         dispatch(addItemToCart(cartItems, cartItem))
