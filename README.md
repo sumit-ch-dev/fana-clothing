@@ -19,7 +19,7 @@ Fork the Project and send me a pull request
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone (https://github.com/sumit1729/fana-clothing.git)
 ```
 
 Go to the project directory
