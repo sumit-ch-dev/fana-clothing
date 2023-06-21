@@ -19,13 +19,13 @@ Fork the Project and send me a pull request
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone https://github.com/sumit1729/fana-clothing.git
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd fana-clothing
 ```
 
 Install dependencies
@@ -37,7 +37,7 @@ Install dependencies
 Start the server
 
 ```bash
-  npm run start
+  npm start
 ```
 
 
