@@ -17,6 +17,7 @@ import {
   doc,
   getDoc,
   setDoc,
+  writeBatch,
   collection,
   query,
   getDocs,
@@ -45,6 +46,23 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd,
+  field
+) => {
+  const collectionRef = collection(db, collectionKey);
+  const batch = writeBatch(db);
+
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+
+  await batch.commit();
+  console.log('done');
+};
+
 export const getCategoriesAndDocuments = async () => {
   const collectionRef = collection(db, 'categories');
   const q = query(collectionRef);
@@ -65,10 +83,7 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) 
 
   const userSnapshot = await getDoc(userRef);
 
-  if (userSnapshot.exists()) {
-    return userRef;
-  } else {
-    //if user data does not exist, create it
+  if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
 
@@ -79,12 +94,12 @@ export const createUserDocumentFromAuth = async (userAuth, additionalData = {}) 
         createdAt,
         ...additionalData,
       });
-      return userRef;
     } catch (error) {
-      console.log("error creating user", error.message);
+      console.log('error creating the user', error.message);
     }
   }
-  return userRef;
+
+  return userSnapshot;
 
 }
 
@@ -104,3 +119,16 @@ export const userSignInWithEmailAndPassword = async (email, password) => {
 export const signOutUser = async () => await signOut(auth)
 
 export const onAuthStateChangedListener = (callback) => onAuthStateChanged(auth, callback)
+
+export const getCurrentUser = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    )
+  })
+}
