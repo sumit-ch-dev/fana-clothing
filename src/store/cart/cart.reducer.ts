@@ -7,7 +7,7 @@ export type CartState = {
   readonly cartItems: CartItem[];
 };
 
-const CART_INITIAL_STATE: CartState = {
+export const CART_INITIAL_STATE: CartState = {
   isCartOpen: false,
   cartItems: [],
 };
