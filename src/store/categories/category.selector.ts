@@ -1,6 +1,11 @@
 import { createSelector } from 'reselect'
 
-const selectCategoriesReducer = (state) => state.categories
+import { CategoriesState } from './category.reducer'
+import { CategoryMap } from './category.types'
+
+const selectCategoriesReducer = (state : CategoriesState): CategoriesState => state.categories
+
+
 
 //memoization of categories
 //does not trigger a re-render if the state.categories.categories is the same
@@ -11,10 +16,10 @@ export const selectCategories = createSelector(
 
 export const selectCategoriesMap = createSelector(
     [selectCategories],
-    (categories) => categories.reduce((accumulator, {title, items}) => {
+    (categories): CategoryMap => categories.reduce((accumulator, {title, items}) => {
         accumulator[title.toLowerCase()] = items
         return accumulator
-    }, {})
+    }, {} as CategoryMap)
 )
 
 
