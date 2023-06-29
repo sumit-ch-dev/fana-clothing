@@ -57,6 +57,7 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
   collectionKey: string,
   objectsToAdd: T[]
 ): Promise<void> => {
+
   const collectionRef = collection(db, collectionKey);
   const batch = writeBatch(db);
 
@@ -72,8 +73,6 @@ export const addCollectionAndDocuments = async <T extends ObjectToAdd>(
 export const getCategoriesAndDocuments = async (): Promise<Category[]> => {
   const collectionRef = collection(db, "categories");
   const q = query(collectionRef);
-
-  //await Promise.reject(new Error("new error"))
 
   const querySnapshot = await getDocs(q);
 
