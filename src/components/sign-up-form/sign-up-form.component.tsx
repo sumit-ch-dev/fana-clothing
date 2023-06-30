@@ -1,5 +1,5 @@
-import { useState } from "react"
-
+import { useState, FormEvent, ChangeEvent } from "react"
+import {AuthError, AuthErrorCodes} from 'firebase/auth'
 
 import FormInput from "../form-input/form-input.component"
 
@@ -29,8 +29,8 @@ const SignUpForm = () => {
         setForm(formInitialState)
     }
 
-    const handleSubmit = async e => {
-        e.preventDefault()
+    const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
         if (password !== confirmPassword) {
             alert("passwords don't match")
             return
@@ -39,7 +39,7 @@ const SignUpForm = () => {
             dispatch(signUpStart(email, password, displayName))
             clearForm()
         } catch (error) {
-            if (error.code === "auth/email-already-in-use") {
+            if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {
                 alert("email already in use")
             } else {
                 console.log(error)
@@ -49,7 +49,7 @@ const SignUpForm = () => {
     }
 
 
-    const handleChange = e => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target
         setForm({ ...form, [name]: value })
     }
@@ -59,7 +59,7 @@ const SignUpForm = () => {
                 <h2>Don't have an Account?</h2>
                 <span>Sign Up with your email and password</span>
                 {/* use handleSubmit function in onSubmit  */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={(e) => handleSubmit}>
                     <FormInput
                         label="Display Name"
                         type="text"
