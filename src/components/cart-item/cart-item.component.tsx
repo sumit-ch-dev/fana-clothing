@@ -4,7 +4,7 @@ import {
     ItemDetailsContainer,
     CartItemName,
     CartItemPrice
-} from './cart-item.styles.jsx'
+} from './cart-item.styles'
 
 import { CartItem as CartItemType } from '../../store/cart/cart.types'
 import { FC, memo } from 'react'

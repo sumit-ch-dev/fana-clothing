@@ -50,7 +50,7 @@ const SignUpForm = () => {
 
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target
+        const { name, value } = event.target
         setForm({ ...form, [name]: value })
     }
     return (
