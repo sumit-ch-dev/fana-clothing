@@ -4,7 +4,8 @@ import { CheckoutPageContainer, CheckoutHeader, HeaderBlock, Total } from './che
 import { selectCartItems, selectCartTotal } from '../../store/cart/cart.selector'
 import PaymentForm from '../../components/payment-form/payment-form.component'
 
-const Checkout = () => {
+
+const Checkout= () => {
     const cartItems = useSelector(selectCartItems)
     const totalAmount = useSelector(selectCartTotal)
     return (
